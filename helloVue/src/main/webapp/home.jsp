@@ -4,21 +4,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Hello Vue</title>
+<title>Insert title here</title>
 </head>
-<script src="https://cdnjs.cloudflare.com/aajax/libs/vue/2.3.4/vue.min.js"></script>
-<script>
-	new Vue({
-		el : '#app'
-		data:{
-			message:'Greetings your Majesty!'
-		}
-	});
-</script>
 <body>
-	<div id="app">
-		<h1>{{message}}</h1>
-	</div>
+<h3>hello</h3>
 </body>
-
 </html>

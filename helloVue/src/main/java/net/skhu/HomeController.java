@@ -15,4 +15,14 @@ public class HomeController {
 		model.addAttribute("now",new Date());
 		return "index";
 	}
+
+	@RequestMapping("/directive")
+	public String directive(Model model){
+		return "directive";
+	}
+
+	@RequestMapping("/hw3")
+	public String hw3(Model model) {
+		return "hw3";
+	}
 }
