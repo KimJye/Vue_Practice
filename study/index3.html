@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <title>vue_study</title>
+  </head>
+
+  <body>
+    <div id="app3">
+      <h1 v-once>{{ title }}</h1>
+      <p>{{ sayHello() }}</p>
+    </div>
+    <div id="app4">
+      <p>URL : {{ aLinkToSkhu }}</p>
+      <p v-html>URL : {{ aLinkToSkhu }}</p>
+    </div>
+    <div id="app5"><a v-bind:href="link">링크</a></div>
+    <script>
+      var app3 = new Vue({
+        el: "#app3",
+        data: {
+          title: "안녕 Vue.JS! v-once 사용~"
+        },
+        methods: {
+          sayHello: function() {
+            this.title = "안녕하십니까!";
+            return this.title;
+          }
+        }
+      });
+      var app4 = new Vue({
+        el: "#app4",
+        data: {
+          aLinkToSkhu: "<a href='http://skhu.ac.kr'>링크</a>"
+        }
+      });
+      var app5 = new Vue({
+        el: "#app5",
+        data: {
+          link: "http://skhu.ac.kr"
+        }
+      });
+    </script>
+  </body>
+</html>
