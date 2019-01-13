@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>vue_study - 조건부 렌더링</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+  </head>
+
+  <body>
+    <div id="app">
+      <p v-if="active">v-if 디렉티브 활성화</p>
+      <p v-else>디렉티브 활성화 안됨.</p>
+      <button @click="active = !active">버튼</button>
+
+      <template v-if="active">
+        <h1>Title</h1>
+        <p>Paragraph 1</p>
+        <p>Paragraph 2</p>
+      </template>
+      <template v-else>
+        <h1>Vue</h1>
+        <p>Vue 1</p>
+        <p>Vue 2</p>
+      </template>
+    </div>
+
+    <script>
+      new Vue({
+        el: "#app",
+        data: {
+          active: true
+        }
+      });
+    </script>
+  </body>
+</html>
