@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>vue_study - 이벤트 렌더링</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+  </head>
+
+  <body>
+    <div id="example-1">
+      <button v-on:click="counter += 1">Add 1</button>
+      <p>위 버튼을 클릭한 횟수는 {{ counter }} 번 입니다.</p>
+      <button v-on:click="warn('Form cannot be submitted yet.', $event)">
+        Submit
+      </button>
+    </div>
+    <div id="example-2">
+      <!-- `greet`는 메소드 이름으로 아래에 정의되어 있습니다 -->
+      <button v-on:click="greet">Greet</button>
+    </div>
+    <div id="example-3">
+      <button v-on:click="say('hi')">Say hi</button>
+      <button v-on:click="say('what')">Say what</button>
+    </div>
+
+    <script>
+      var example1 = new Vue({
+        el: "#example-1",
+        data: {
+          counter: 0
+        },
+        methods: {
+          warn: function(message, event) {
+            // 이제 네이티브 이벤트에 액세스 할 수 있습니다
+            if (event) event.preventDefault();
+            alert(message);
+          }
+        }
+      });
+      var example2 = new Vue({
+        el: "#example-2",
+        data: {
+          name: "Vue.js"
+        },
+        // 메소드는 `methods` 객체 안에 정의합니다
+        methods: {
+          greet: function(event) {
+            // 메소드 안에서 사용하는 `this` 는 Vue 인스턴스를 가리킵니다
+            alert("Hello " + this.name + "!");
+            // `event` 는 네이티브 DOM 이벤트입니다
+            if (event) {
+              alert(event.target.tagName);
+            }
+          }
+        }
+      });
+      new Vue({
+        el: "#example-3",
+        methods: {
+          say: function(message) {
+            alert(message);
+          }
+        }
+      });
+    </script>
+  </body>
+</html>
