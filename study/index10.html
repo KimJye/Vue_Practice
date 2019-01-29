@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>vue_study - 컴포넌트</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+  </head>
+
+  <body>
+    <div id="example"><my-component></my-component></div>
+
+    <div id="example2"><my-component2></my-component2></div>
+
+    <div id="example-2">
+      <simple-counter></simple-counter>
+      <simple-counter></simple-counter>
+      <simple-counter></simple-counter>
+    </div>
+
+    <div id="ex">
+      <pro-child message="하나"></pro-child>
+      <pro-child message="둘"></pro-child>
+      <pro-child message="셋"></pro-child>
+    </div>
+
+    <div id="ex2">
+      <input v-model="parentMsg" /> <br />
+      <child v-bind:my-message="parentMsg"></child>
+    </div>
+
+    <div id="counter-event-example">
+      <p>{{ total }}</p>
+      <button-counter v-on:increment="incrementTotal"></button-counter>
+      <button-counter v-on:increment="incrementTotal"></button-counter>
+    </div>
+  </body>
+
+  <script>
+    //example  (전역 컴포넌트)
+    // 등록
+    Vue.component("my-component", {
+      template: "<div>사용자 정의 컴포넌트 입니다!</div>"
+    });
+
+    // 루트 인스턴스 생성
+    new Vue({
+      el: "#example"
+    });
+    //---------------------------------------------------------
+
+    //example2 (지역 컴포넌트)
+    var Child = {
+      template: "<div>지역적 사용자 정의 컴포넌트 입니다!</div>"
+    };
+
+    new Vue({
+      el: "#example2",
+      components: {
+        // <my-component2> 는 상위 템플릿에서만 사용할 수 있습니다.
+        "my-component2": Child
+      }
+    });
+    //-------------------------------------------------------------
+
+    // example-2
+    Vue.component("simple-counter", {
+      template: '<button v-on:click="counter += 1">{{ counter }}</button>',
+      // 데이터는 기술적으로 함수이므로 Vue는 따지지 않지만
+      // 각 컴포넌트 인스턴스에 대해 같은 객체 참조를 반환합니다.
+      data: function() {
+        return {
+          counter: 0
+        };
+      }
+    });
+
+    new Vue({
+      el: "#example-2"
+    });
+    //----------------------------------------------------------------
+
+    //props
+    Vue.component("pro-child", {
+      // props 정의
+      props: ["message"],
+      // 데이터와 마찬가지로 prop은 템플릿 내부에서 사용할 수 있으며
+      // vm의 this.message로 사용할 수 있습니다.
+      template: "<span>{{ message }}</span>"
+    });
+    new Vue({
+      el: "#ex"
+    });
+    //--------------------------------------------------------------
+
+    //동적 props
+    Vue.component("child", {
+      // props 정의
+      props: ["myMessage"],
+      // 데이터와 마찬가지로 prop은 템플릿 내부에서 사용할 수 있으며
+      // vm의 this.message로 사용할 수 있습니다.
+      template: "<span>{{ myMessage }}</span>"
+    });
+    new Vue({
+      el: "#ex2",
+      data: {
+        parentMsg: "부모가 가지고 있는 데이터"
+      }
+    });
+    //--------------------------------------
+    //v-on을 이용한 사용자 지정 이벤트
+    Vue.component("button-counter", {
+      template: '<button v-on:click="incrementCounter">{{ counter }}</button>',
+      data: function() {
+        return {
+          counter: 0
+        };
+      },
+      methods: {
+        incrementCounter: function() {
+          this.counter += 1;
+          this.$emit("increment");
+        }
+      }
+    });
+
+    new Vue({
+      el: "#counter-event-example",
+      data: {
+        total: 0
+      },
+      methods: {
+        incrementTotal: function() {
+          this.total += 1;
+        }
+      }
+    });
+  </script>
+</html>
