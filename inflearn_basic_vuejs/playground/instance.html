@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Vue Instance</title>
+</head>
+<body>
+    <div id="app"></div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        var vm = new Vue({
+            el: '#app' // app이라는 id를 가진 태그를 찾아서 인스턴스를 붙이겠다. 
+                       // => 붙이는 순간 해당 태그에서는Vue의 기능이 유효해진다.
+        }); //  Vue 인스턴스 생성
+        console.log(vm); // Vue 인스턴스안에 어떤 속성과 API가 있는지 확인.    
+    </script>
+</body>
+</html>
