@@ -12,6 +12,13 @@
         <app-content></app-content>
         <app-footer></app-footer>
     </div>
+
+    <div id="app2">
+        <app-header></app-header>
+        <app-content></app-content>
+        <app-footer></app-footer> // 에러가 날것이여~
+    </div>
+
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script>
 
@@ -37,6 +44,14 @@
                     template: '<footer>footer</footer>'
                 }
             }
+        })
+
+        // root component
+        new Vue({
+            el: "#app2",
+            data: {
+                message: 'hello'
+            },
         })
     </script>
 </body>
