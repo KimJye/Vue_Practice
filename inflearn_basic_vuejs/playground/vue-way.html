@@ -17,23 +17,36 @@
 		//  정의할 내용
         // })     
 
-        // viewModel 객체에 str이라는 속성에다가 get과 set을 선언
-        // 이것이 바로 Vue의 핵심인 Reactivity(반응성)
-        Object.defineProperty(viewModel,'str', {
-            // 속성의 접근 했을 때의 동작을 정의
-            // viewModel.str 로 접근
-            get: function(){
-                console.log('접근');
-                
-            },
-            
-            // 속성의 값을 할당했을 때의 동작을 정의
-            // viewModel.str = 10 로 할당 
-            set: function(newValue){
-                console.log('할당', newValue);
-                div.innerHTML = newValue;
+        
+        // 즉시 실행 함수
+        (() => {
+            function init() {
+                // viewModel 객체에 str이라는 속성에다가 get과 set을 선언
+                // 이것이 바로 Vue의 핵심인 Reactivity(반응성)
+                Object.defineProperty(viewModel,'str', {
+                    // 속성의 접근 했을 때의 동작을 정의
+                    // viewModel.str 로 접근
+                    get: function(){
+                        console.log('접근');
+                        
+                    }, 
+                    
+                    // 속성의 값을 할당했을 때의 동작을 정의
+                    // viewModel.str = 10 로 할당 
+                    set: function(newValue){
+                        console.log('할당', newValue);
+                        render(newValue);
+                    }
+                })
             }
-        })
+
+            function render(value) {
+                div.innerHTML = value;
+            }
+
+            init();
+        })();
+        
     </script>
 </body>
 </html>
