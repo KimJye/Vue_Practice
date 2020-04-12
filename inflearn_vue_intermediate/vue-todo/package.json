@@ -41,7 +41,8 @@
       "quotes": [
         "error",
         "single"
-      ]
+      ],
+      "semi": 1
     }
   },
   "browserslist": [
