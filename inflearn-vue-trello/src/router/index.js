@@ -8,18 +8,26 @@ import NotFound from '../components/NotFound.vue';
 
 Vue.use(VueRouter);
 
+const requireAuth = (to, from, next) => {
+  const isAuth = localStorage.getItem('token');
+  const loginPath = `/login?rPath=${encodeURIComponent(to.path)}`;
+  isAuth ? next() : next(loginPath);
+};
+
 const router = new VueRouter({
   mode: 'history',
   routes: [
-    { path: '/', component: Home },
+    { path: '/', component: Home, beforeEnter: requireAuth },
     { path: '/login', component: Login },
     {
       path: '/board/:bid',
       component: Board,
+      beforeEnter: requireAuth,
       children: [
         {
           path: 'card/:cid',
           component: Card,
+          beforeEnter: requireAuth,
         },
       ],
     },
